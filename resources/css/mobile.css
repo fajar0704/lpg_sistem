@@ -1,0 +1,29 @@
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    /* Touch-friendly buttons */
+    button, a.btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better table scrolling */
+    .table-container {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Prevent zoom on input focus */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Smooth transitions */
+.sidebar-transition {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Better touch targets */
+.touch-target {
+    padding: 12px;
+    margin: 4px 0;
+}
