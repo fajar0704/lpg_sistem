@@ -20,6 +20,7 @@ class StockLpg extends Model
         'stock_in',
         'stock_out',
         'safety_stock',
+        'max_stock',
     ];
 
     public function isBelowSafety(): bool
@@ -27,8 +28,11 @@ class StockLpg extends Model
         return $this->stok_isi <= $this->safety_stock;
     }
 
-    public function getMaxStockAttribute(): int
+    public function getMaxStockAttribute($value): int
     {
+        if ($value > 0) {
+            return $value;
+        }
         return match ($this->tabung_type) {
             '3kg' => 120,
             '5kg' => 10,

@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Riwayat Penjualan</h2>
-    <a href="{{ route('sub-pangkalan.sales.create') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">+ Penjualan Baru</a>
+    <a href="{{ route('sub-pangkalan.sales.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">+ Penjualan Baru</a>
 </div>
 
 <div class="bg-white rounded-lg shadow overflow-hidden">
@@ -35,7 +35,7 @@
                     </td>
                     <td class="px-4 py-3 text-sm text-gray-900">{{ $sale->total_quantity }} tabung</td>
                     <td class="px-4 py-3 text-sm">
-                        <a href="{{ route('sub-pangkalan.sales.show', $sale) }}" class="text-green-600 hover:underline">Detail</a>
+                        <a href="{{ route('sub-pangkalan.sales.show', $sale) }}" class="text-blue-600 hover:underline">Detail</a>
                     </td>
                 </tr>
                 @empty

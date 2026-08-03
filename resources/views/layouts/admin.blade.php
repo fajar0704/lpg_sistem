@@ -28,12 +28,14 @@
             <!-- Sidebar Header / Brand -->
             <div class="p-6 border-b border-slate-800/60">
                 <div class="flex items-center gap-3">
-                    <div class="p-2 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-xl shadow-md">
-                        <!-- Stylized Flame Vector Icon -->
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
+                    <div class="w-10 h-10 bg-white rounded-full border border-slate-700/50 overflow-hidden flex items-center justify-center p-0.5 shrink-0 shadow-md">
+                        @php
+                            $adminCustomLogo = \App\Models\Setting::getValue('login_logo');
+                            $adminDefaultLogo = $adminCustomLogo ? asset('storage/' . $adminCustomLogo) : asset('images/elpiji_logo.png');
+                            $adminPhoto = auth()->user()->photo;
+                            $adminLogoUrl = $adminPhoto ? asset('storage/' . $adminPhoto) : $adminDefaultLogo;
+                        @endphp
+                        <img src="{{ $adminLogoUrl }}" alt="Logo Pangkalan" class="w-full h-full rounded-full object-cover">
                     </div>
                     <div>
                         <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">Sistem LPG</h1>
@@ -76,13 +78,7 @@
                     <span>Riwayat Penjualan</span>
                 </a>
 
-                <!-- Distribusi LPG -->
-                <a href="{{ route('admin.distribution.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition duration-200 {{ request()->routeIs('admin.distribution.*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-slate-400 hover:bg-slate-800/50 hover:text-white' }}">
-                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path>
-                    </svg>
-                    <span>Distribusi LPG</span>
-                </a>
+
 
                 <!-- Monitoring Sub Pangkalan -->
                 <a href="{{ route('admin.monitoring.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition duration-200 {{ request()->routeIs('admin.monitoring.*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-slate-400 hover:bg-slate-800/50 hover:text-white' }}">
@@ -90,7 +86,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                     </svg>
-                    <span>Monitoring Sub Pkl</span>
+                    <span>Monitoring Sub Pangkalan</span>
                 </a>
 
                 <!-- Data Pelanggan -->
@@ -122,9 +118,13 @@
             <div class="p-4 border-t border-slate-800/60 bg-slate-950/40">
                 <div class="flex items-center justify-between gap-2">
                     <div class="flex items-center gap-2.5 overflow-hidden">
-                        <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-200 shrink-0">
-                            {{ substr(auth()->user()->name, 0, 2) }}
-                        </div>
+                        @if(auth()->user()->photo)
+                            <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Avatar" class="w-8 h-8 rounded-full object-cover shrink-0">
+                        @else
+                            <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-200 shrink-0">
+                                {{ substr(auth()->user()->name, 0, 2) }}
+                            </div>
+                        @endif
                         <span class="text-xs font-semibold text-slate-300 truncate" title="{{ auth()->user()->name }}">{{ auth()->user()->name }}</span>
                     </div>
                     <form action="{{ route('logout') }}" method="POST" class="shrink-0">
@@ -187,6 +187,7 @@
             overlay.classList.add('hidden');
         });
     </script>
+    @stack('scripts')
 </body>
 </html>
 

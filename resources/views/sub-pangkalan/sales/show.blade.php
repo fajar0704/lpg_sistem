@@ -2,7 +2,7 @@
 @section('title', 'Detail Penjualan')
 @section('content')
 <div class="mb-6">
-    <a href="{{ route('sub-pangkalan.sales.index') }}" class="text-green-600 hover:text-green-900">← Kembali</a>
+    <a href="{{ route('sub-pangkalan.sales.index') }}" class="text-blue-600 hover:text-blue-900">← Kembali</a>
     <h2 class="text-2xl font-bold text-gray-800 mt-2">Detail Penjualan</h2>
 </div>
 

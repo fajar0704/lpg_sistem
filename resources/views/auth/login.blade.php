@@ -10,13 +10,17 @@
 
     <div class="relative bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-2xl shadow-2xl border border-white/20 w-full max-w-md transition-all duration-300 hover:shadow-blue-500/10 hover:shadow-2xl">
         <div class="text-center mb-8">
-            <div class="flex justify-center mb-5">
-                <div class="p-3 bg-white rounded-2xl shadow-md border border-slate-100 hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('images/elpiji_logo.png') }}" alt="Logo Elpiji" class="h-20 w-auto object-contain">
+                @php
+                    $customLogo = \App\Models\Setting::getValue('login_logo');
+                    $logoUrl = $customLogo ? asset('storage/' . $customLogo) : asset('images/elpiji_logo.png');
+                    $loginTitle = \App\Models\Setting::getValue('login_title', 'Sistem Pangkalan LPG');
+                    $loginSubtitle = \App\Models\Setting::getValue('login_subtitle', 'Silakan masuk untuk mengelola LPG');
+                @endphp
+                <div class="w-24 h-24 bg-white rounded-full shadow-md border border-slate-100 hover:scale-105 transition-transform duration-300 overflow-hidden flex items-center justify-center p-1 mx-auto mb-5">
+                    <img src="{{ $logoUrl }}" alt="Logo Pangkalan" class="w-full h-full rounded-full object-cover">
                 </div>
-            </div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">Sistem Pangkalan LPG</h1>
-            <p class="text-sm sm:text-base text-slate-500 mt-2">Silakan masuk untuk mengelola distribusi LPG</p>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">{{ $loginTitle }}</h1>
+            <p class="text-sm sm:text-base text-slate-500 mt-2">{{ $loginSubtitle }}</p>
         </div>
 
         @if($errors->any())

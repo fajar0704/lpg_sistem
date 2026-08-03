@@ -9,9 +9,14 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'ktp', 'phone', 'address', 'category', 'is_active'];
+    protected $fillable = ['name', 'ktp', 'phone', 'address', 'category', 'is_active', 'photo', 'kk_photo', 'sub_pangkalan_id'];
 
     protected $casts = ['is_active' => 'boolean'];
+
+    public function subPangkalan()
+    {
+        return $this->belongsTo(SubPangkalan::class);
+    }
 
     public function sales()
     {
@@ -21,10 +26,11 @@ class Customer extends Model
     public function getCategoryLabelAttribute(): string
     {
         return match($this->category) {
-            'rumah_tangga' => 'Rumah Tangga',
-            'usaha_mikro'  => 'Usaha Mikro',
-            'pengecer'     => 'Pengecer',
-            default        => $this->category,
+            'rumah_tangga'  => 'Rumah Tangga',
+            'usaha_mikro'   => 'Usaha Mikro',
+            'pengecer'      => 'Pengecer',
+            'konsumen_umum' => 'Konsumen Umum (Non Subsidi)',
+            default         => $this->category,
         };
     }
 
@@ -38,7 +44,7 @@ class Customer extends Model
         if ($tabungType !== '3kg') {
             return 999; // Unlimited for non-subsidized
         }
-        return $this->category === 'rumah_tangga' ? 4 : ($this->category === 'usaha_mikro' ? 10 : 999);
+        return $this->category === 'rumah_tangga' ? 5 : ($this->category === 'usaha_mikro' ? 10 : 999);
     }
 
     public function getUsedQuotaThisMonth(string $tabungType): int
@@ -52,7 +58,30 @@ class Customer extends Model
 
     public function getLastTransactionDate()
     {
-        $last = $this->penjualanLangsung()->latest('transaction_date')->first();
-        return $last ? $last->transaction_date->diffForHumans() : 'Belum ada transaksi';
+        $lastDirect = $this->penjualanLangsung()
+            ->latest('transaction_date')
+            ->latest('created_at')
+            ->first();
+
+        $lastSubTx = \App\Models\SubPangkalanTransaction::where('customer_id', $this->id)
+            ->where('transaction_type', 'sell')
+            ->latest('transaction_date')
+            ->latest('created_at')
+            ->first();
+
+        $last = null;
+        if ($lastDirect && $lastSubTx) {
+            $last = $lastDirect->created_at > $lastSubTx->created_at ? $lastDirect : $lastSubTx;
+        } else {
+            $last = $lastDirect ?? $lastSubTx;
+        }
+
+        if (!$last) {
+            return 'Belum ada transaksi';
+        }
+
+        $dateStr = \Carbon\Carbon::parse($last->transaction_date)->translatedFormat('d M Y');
+        $timeStr = \Carbon\Carbon::parse($last->created_at)->timezone('Asia/Jakarta')->format('H:i');
+        return "{$dateStr} ({$timeStr} WIB)";
     }
 }

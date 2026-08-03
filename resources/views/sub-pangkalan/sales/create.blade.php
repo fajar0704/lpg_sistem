@@ -1,6 +1,7 @@
 @extends('layouts.sub-pangkalan')
 @section('title', 'Jual LPG')
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <div class="mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Transaksi Penjualan</h2>
 </div>
@@ -21,7 +22,7 @@
 @else
 <div class="bg-white p-6 rounded-lg shadow max-w-2xl">
     <div class="flex items-center gap-2 mb-4">
-        <a href="{{ route('sub-pangkalan.sales.create') }}" class="text-green-600 hover:underline text-sm">← Ganti Kategori</a>
+        <a href="{{ route('sub-pangkalan.sales.create') }}" class="text-blue-600 hover:underline text-sm">← Ganti Kategori</a>
         <span class="text-gray-400">|</span>
         <span class="text-sm font-semibold text-gray-700">
             Kategori: {{ ['rumah_tangga'=>'Rumah Tangga','usaha_mikro'=>'Usaha Mikro','pengecer'=>'Pengecer'][$category] }}
@@ -38,7 +39,7 @@
         @csrf
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-1">Pelanggan</label>
-            <select name="customer_id" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+            <select name="customer_id" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 select2-customer">
                 <option value="">Pilih Pelanggan</option>
                 @foreach($customers as $c)
                 <option value="{{ $c->id }}" {{ old('customer_id') == $c->id ? 'selected' : '' }}>
@@ -54,7 +55,7 @@
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-1">Tanggal Penjualan</label>
             <input type="date" name="sale_date" value="{{ old('sale_date', date('Y-m-d')) }}" required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
         </div>
 
         <div class="mb-4">
@@ -71,11 +72,11 @@
                         class="w-28 px-3 py-2 border border-gray-300 rounded-lg text-sm">
                 </div>
             </div>
-            <button type="button" onclick="addItem()" class="mt-2 text-green-600 text-sm hover:underline">+ Tambah Item</button>
+            <button type="button" onclick="addItem()" class="mt-2 text-blue-600 text-sm hover:underline">+ Tambah Item</button>
         </div>
 
         <div class="flex gap-2 mt-6">
-            <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">💾 Simpan Penjualan</button>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">💾 Simpan Penjualan</button>
             <a href="{{ route('sub-pangkalan.sales.index') }}" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Batal</a>
         </div>
     </form>
@@ -97,6 +98,25 @@ function addItem() {
         </div>`);
     idx++;
 }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2-customer').select2({
+            placeholder: "Ketik NIK atau Nama Pelanggan...",
+            allowClear: true,
+            minimumInputLength: 1,
+            language: {
+                inputTooShort: function () {
+                    return "Ketik minimal 1 huruf/inisial untuk mencari pelanggan...";
+                },
+                noResults: function () {
+                    return "Pelanggan tidak ditemukan";
+                }
+            }
+        });
+    });
 </script>
 @endif
 @endsection

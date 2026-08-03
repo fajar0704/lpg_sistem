@@ -24,6 +24,7 @@ class User extends Authenticatable
         'role',
         'sub_pangkalan_id',
         'is_active',
+        'photo',
     ];
 
     /**
@@ -75,19 +76,19 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the distributions relation.
+     * Get the sub pangkalan transactions relation.
      */
-    public function distributions()
+    public function subPangkalanTransactions()
     {
-        return $this->hasMany(Distribution::class);
+        return $this->hasMany(SubPangkalanTransaction::class);
     }
 
     /**
-     * Get the validated distributions relation.
+     * Get the validated sub pangkalan transactions relation.
      */
-    public function validatedDistributions()
+    public function validatedSubPangkalanTransactions()
     {
-        return $this->hasMany(Distribution::class, 'validated_by');
+        return $this->hasMany(SubPangkalanTransaction::class, 'validated_by');
     }
 
     /**

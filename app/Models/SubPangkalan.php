@@ -12,7 +12,7 @@ class SubPangkalan extends Model
     protected $table = 'sub_pangkalan';
 
     protected $fillable = [
-        'name', 'code', 'address', 'phone', 'is_active', 'stok_isi', 'stok_kosong', 'ktp', 'photo',
+        'name', 'code', 'address', 'phone', 'is_active', 'stok_isi', 'stok_kosong', 'ktp', 'photo', 'kk_photo',
         'nama_ktp', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'alamat_ktp'
     ];
 
@@ -33,21 +33,14 @@ class SubPangkalan extends Model
         $this->increment('stok_kosong', $jumlah);
     }
 
-    // Saat tukar kosong: kosong berkurang, isi bertambah
-    public function tukarKosong(int $jumlah): void
-    {
-        $this->decrement('stok_kosong', $jumlah);
-        $this->increment('stok_isi', $jumlah);
-    }
-
     public function user()
     {
         return $this->hasOne(User::class);
     }
 
-    public function distributions()
+    public function transactions()
     {
-        return $this->hasMany(Distribution::class);
+        return $this->hasMany(SubPangkalanTransaction::class);
     }
 
     public function reports()

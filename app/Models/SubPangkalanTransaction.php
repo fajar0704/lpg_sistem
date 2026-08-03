@@ -5,20 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Distribution extends Model
+class SubPangkalanTransaction extends Model
 {
     use HasFactory;
+
+    protected $table = 'sub_pangkalan_transactions';
 
     protected $fillable = [
         'sub_pangkalan_id', 'user_id', 'tabung_type', 'quantity',
         'type', 'transaction_type', 'customer_type',
-        'transaction_date', 'status', 'notes', 'validated_by', 'validated_at',
+        'transaction_date', 'status', 'notes', 'validated_by', 'validated_at', 'customer_id',
     ];
 
     protected $casts = [
         'transaction_date' => 'date',
         'validated_at' => 'datetime',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
     public function subPangkalan()
     {
