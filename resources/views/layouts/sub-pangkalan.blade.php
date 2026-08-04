@@ -24,8 +24,15 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
+    @php
+        $customLoginLogo = \App\Models\Setting::getValue('login_logo');
+        $defaultLogoUrl = $customLoginLogo ? asset('storage/' . $customLoginLogo) : asset('images/elpiji_logo.png');
+        $userPhoto = auth()->user()->photo;
+        $logoUrl = $userPhoto ? asset('storage/' . $userPhoto) : $defaultLogoUrl;
+    @endphp
+
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2.5 rounded-xl shadow-lg hover:bg-blue-700 transition-all duration-300 transform cursor-pointer">
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-50 bg-transparent text-slate-700 hover:text-slate-900 p-2.5 rounded-xl transition-all duration-300 transform cursor-pointer">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -37,14 +44,10 @@
             <!-- Sidebar Header / Brand -->
             <div class="p-6 border-b border-slate-800/60">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white rounded-full border border-slate-700/50 overflow-hidden flex items-center justify-center p-0.5 shrink-0 shadow-md">
-                        @php
-                            $customLoginLogo = \App\Models\Setting::getValue('login_logo');
-                            $defaultLogoUrl = $customLoginLogo ? asset('storage/' . $customLoginLogo) : asset('images/elpiji_logo.png');
-                            $userPhoto = auth()->user()->photo;
-                            $logoUrl = $userPhoto ? asset('storage/' . $userPhoto) : $defaultLogoUrl;
-                        @endphp
-                        <img src="{{ $logoUrl }}" alt="Logo Pangkalan" class="w-full h-full rounded-full object-cover">
+                    <div class="hidden lg:block">
+                        <div class="w-10 h-10 bg-white rounded-full border border-slate-700/50 overflow-hidden flex items-center justify-center p-0.5 shrink-0 shadow-md">
+                            <img src="{{ $logoUrl }}" alt="Logo Pangkalan" class="w-full h-full rounded-full object-cover">
+                        </div>
                     </div>
                     <div class="overflow-hidden">
                         <h1 class="text-sm font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent truncate">
@@ -140,7 +143,11 @@
         <!-- Main Content Wrapper -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Header for Mobile -->
-            <header class="h-16 bg-white border-b border-slate-100 lg:hidden flex items-center justify-end px-6 shrink-0"></header>
+            <header class="h-16 bg-white border-b border-slate-100 lg:hidden flex items-center justify-end px-6 shrink-0">
+                <div class="w-10 h-10 bg-white rounded-full border border-slate-200 overflow-hidden flex items-center justify-center p-0.5 shadow-xs">
+                    <img src="{{ $logoUrl }}" alt="Logo Pangkalan" class="w-full h-full rounded-full object-cover">
+                </div>
+            </header>
             
             <main class="flex-1 overflow-y-auto p-4 lg:p-8 pt-6 lg:pt-8 bg-slate-50">
                 <!-- Toast Notifications -->
@@ -180,12 +187,16 @@
             // Toggle hamburger / close icon
             const isOpen = !sidebar.classList.contains('-translate-x-full');
             if (isOpen) {
+                menuBtn.classList.remove('text-slate-700', 'hover:text-slate-900');
+                menuBtn.classList.add('text-white', 'hover:text-slate-200');
                 menuBtn.innerHTML = `
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 `;
             } else {
+                menuBtn.classList.remove('text-white', 'hover:text-slate-200');
+                menuBtn.classList.add('text-slate-700', 'hover:text-slate-900');
                 menuBtn.innerHTML = `
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -198,6 +209,8 @@
             sidebar.classList.add('-translate-x-full');
             menuBtn.classList.remove('translate-x-72');
             overlay.classList.add('hidden');
+            menuBtn.classList.remove('text-white', 'hover:text-slate-200');
+            menuBtn.classList.add('text-slate-700', 'hover:text-slate-900');
             menuBtn.innerHTML = `
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
