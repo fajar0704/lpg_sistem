@@ -158,15 +158,15 @@
                 </div>
             </div>
             <!-- Tab Controls -->
-            <div class="flex border-t border-slate-100/60 overflow-x-auto">
-                <button onclick="switchTab('tab-penjualan')" id="btn-tab-penjualan" class="tab-btn px-6 py-3.5 text-xs sm:text-sm font-bold text-blue-600 border-b-2 border-blue-600 transition flex items-center gap-2 whitespace-nowrap focus:outline-none cursor-pointer">
-                    🛒 Penjualan Pelanggan
+            <div class="flex border-t border-slate-100/60 overflow-x-auto sm:overflow-x-visible">
+                <button onclick="switchTab('tab-penjualan')" id="btn-tab-penjualan" class="tab-btn flex-1 sm:flex-initial px-2.5 sm:px-6 py-3.5 text-xs sm:text-sm font-bold text-blue-600 border-b-2 border-blue-600 transition flex items-center justify-center gap-1.5 whitespace-nowrap focus:outline-none cursor-pointer">
+                    <span>🛒 Penjualan<span class="hidden sm:inline"> Pelanggan</span></span>
                 </button>
-                <button onclick="switchTab('tab-pasokan')" id="btn-tab-pasokan" class="tab-btn px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 border-b-2 border-transparent transition flex items-center gap-2 whitespace-nowrap focus:outline-none cursor-pointer">
-                    📥 Penerimaan Tabung Isi
+                <button onclick="switchTab('tab-pasokan')" id="btn-tab-pasokan" class="tab-btn flex-1 sm:flex-initial px-2.5 sm:px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 whitespace-nowrap focus:outline-none cursor-pointer">
+                    <span>📥 Penerimaan<span class="hidden sm:inline"> Tabung Isi</span></span>
                 </button>
-                <button onclick="switchTab('tab-tukar')" id="btn-tab-tukar" class="tab-btn px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 border-b-2 border-transparent transition flex items-center gap-2 whitespace-nowrap focus:outline-none cursor-pointer">
-                    🔄 Tukar Tabung Kosong
+                <button onclick="switchTab('tab-tukar')" id="btn-tab-tukar" class="tab-btn flex-1 sm:flex-initial px-2.5 sm:px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 whitespace-nowrap focus:outline-none cursor-pointer">
+                    <span>🔄 Tukar<span class="hidden sm:inline"> Tabung Kosong</span></span>
                 </button>
             </div>
         </div>

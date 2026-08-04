@@ -12,11 +12,20 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        #sidebar nav::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        #sidebar nav {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2.5 rounded-xl shadow-lg hover:bg-blue-700 transition cursor-pointer">
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2.5 rounded-xl shadow-lg hover:bg-blue-700 transition-all duration-300 transform cursor-pointer">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -179,12 +188,35 @@
 
         menuBtn.addEventListener('click', () => {
             sidebar.classList.toggle('-translate-x-full');
+            menuBtn.classList.toggle('translate-x-72');
             overlay.classList.toggle('hidden');
+            
+            // Toggle hamburger / close icon
+            const isOpen = !sidebar.classList.contains('-translate-x-full');
+            if (isOpen) {
+                menuBtn.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                `;
+            } else {
+                menuBtn.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                `;
+            }
         });
 
         overlay.addEventListener('click', () => {
             sidebar.classList.add('-translate-x-full');
+            menuBtn.classList.remove('translate-x-72');
             overlay.classList.add('hidden');
+            menuBtn.innerHTML = `
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            `;
         });
     </script>
     @stack('scripts')

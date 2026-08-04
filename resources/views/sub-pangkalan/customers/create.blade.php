@@ -68,7 +68,7 @@
             </div>
 
             <!-- SECTION 2: Kamera / Dokumentasi Foto KTP -->
-            <div class="p-6 sm:p-8 space-y-6">
+            <div class="px-4 py-6 sm:p-8 space-y-6">
                 <div class="flex items-center gap-2 pb-1.5 border-b border-slate-50">
                     <div class="p-1.5 bg-rose-50 text-rose-600 rounded-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@
                     <h3 class="text-base font-bold text-slate-800">Dokumentasi Foto KTP / Pelanggan</h3>
                 </div>
 
-                <div class="flex flex-col items-center gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-200 max-w-md mx-auto">
+                <div class="flex flex-col items-center gap-4 p-4 sm:p-6 bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md mx-auto">
                     <!-- Tombol Aktifkan Kamera (Default Visible) -->
                     <div id="camera-activation-area" class="w-full flex flex-col items-center justify-center py-10 bg-white border border-dashed border-slate-300 rounded-2xl text-center space-y-3">
                         <div class="p-3 bg-rose-50 text-rose-600 rounded-full">
@@ -88,7 +88,7 @@
                             </svg>
                         </div>
                         <p class="text-xs text-slate-500 font-semibold px-4">Gunakan kamera untuk mengambil foto KTP secara langsung.</p>
-                        <div class="flex items-center gap-3 justify-center">
+                        <div class="flex flex-wrap items-center gap-2.5 justify-center w-full px-2">
                             <button type="button" id="btn-start-camera" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 transition duration-200 shadow-md shadow-blue-500/10 cursor-pointer">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -166,7 +166,7 @@
             </div>
 
             <!-- SECTION 3: Kamera / Dokumentasi Foto Kartu Keluarga (KK) -->
-            <div id="kk-camera-section" class="p-6 sm:p-8 space-y-6 border-t border-slate-100">
+            <div id="kk-camera-section" class="px-4 py-6 sm:p-8 space-y-6 border-t border-slate-100">
                 <div class="flex items-center justify-between pb-1.5 border-b border-slate-50">
                     <div class="flex items-center gap-2">
                         <div class="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
@@ -181,7 +181,7 @@
                     </span>
                 </div>
 
-                <div class="flex flex-col items-center gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-200 max-w-md mx-auto">
+                <div class="flex flex-col items-center gap-4 p-4 sm:p-6 bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md mx-auto">
                     <!-- Photo Required Validation Error Banner -->
                     <div id="kk-photo-validation-error" class="hidden w-full max-w-md p-3 bg-rose-50 border border-rose-200 text-rose-600 font-bold text-xs rounded-xl text-center shadow-xs">
                         ⚠️ Dokumentasi Foto KK wajib diambil sebelum menyimpan data.
@@ -195,7 +195,7 @@
                             </svg>
                         </div>
                         <p class="text-xs text-slate-500 font-semibold px-4">Gunakan kamera untuk mengambil foto KK secara langsung.</p>
-                        <div class="flex items-center gap-3 justify-center">
+                        <div class="flex flex-wrap items-center gap-2.5 justify-center w-full px-2">
                             <button type="button" id="kk-btn-start-camera" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 transition duration-200 shadow-md shadow-blue-500/10 cursor-pointer">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>

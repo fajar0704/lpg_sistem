@@ -98,14 +98,14 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-4xl mx-auto">
                         <!-- Left Column: Current Photo -->
-                        <div class="flex flex-col items-center gap-3 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                        <div class="flex flex-col items-center gap-3 p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md mx-auto">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Foto Saat Ini</span>
                             @if($customer->photo)
-                            <div class="w-80 h-60 rounded-xl overflow-hidden border border-slate-200 bg-white flex items-center justify-center p-2 shadow-inner">
+                            <div class="w-full max-w-[320px] h-60 rounded-xl overflow-hidden border border-slate-200 bg-white flex items-center justify-center p-2 shadow-inner">
                                 <img src="{{ asset('storage/' . $customer->photo) }}" alt="Foto KTP Saat Ini" class="max-w-full max-h-full object-contain rounded-lg">
                             </div>
                             @else
-                            <div class="w-80 h-60 rounded-xl border-2 border-dashed border-slate-200 bg-white flex flex-col items-center justify-center text-slate-400 gap-2">
+                            <div class="w-full max-w-[320px] h-60 rounded-xl border-2 border-dashed border-slate-200 bg-white flex flex-col items-center justify-center text-slate-400 gap-2">
                                 <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
@@ -115,7 +115,7 @@
                         </div>
 
                         <!-- Right Column: Camera KTP Widget -->
-                        <div class="flex flex-col items-center gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                        <div class="flex flex-col items-center gap-4 p-4 sm:p-6 bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md mx-auto">
                             <div class="w-full flex items-center justify-between">
                                 <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Ambil Foto Baru</span>
                                 <span id="camera-badge" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-200">
@@ -124,14 +124,14 @@
                             </div>
 
                             <!-- Tombol Aktifkan Kamera (Default Visible) -->
-                            <div id="camera-activation-area" class="w-80 h-60 flex flex-col items-center justify-center bg-white border border-dashed border-slate-300 rounded-xl text-center space-y-3 p-4">
+                            <div id="camera-activation-area" class="w-full max-w-[320px] h-60 flex flex-col items-center justify-center bg-white border border-dashed border-slate-300 rounded-xl text-center space-y-3 p-4">
                                 <div class="p-2.5 bg-rose-50 text-rose-600 rounded-full">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                     </svg>
                                 </div>
                                 <p class="text-[10px] text-slate-500 font-semibold px-2">Gunakan kamera untuk mengambil foto KTP secara langsung.</p>
-                                <div class="flex items-center gap-2 justify-center">
+                                <div class="flex flex-wrap items-center gap-2 justify-center w-full">
                                     <button type="button" id="btn-start-camera" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] flex items-center gap-1 transition shadow-md shadow-blue-500/10 cursor-pointer">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -147,7 +147,7 @@
                             </div>
 
                             <!-- Camera Active Area (Hidden by Default) -->
-                            <div id="camera-active-area" class="hidden w-80 space-y-3">
+                            <div id="camera-active-area" class="hidden w-full max-w-[320px] space-y-3">
                                 <!-- Video & Canvas Viewport Container -->
                                 <div class="bg-slate-950 w-full h-60 rounded-xl relative overflow-hidden flex flex-col items-center justify-center border border-slate-800 shadow-inner group">
                                     <!-- Placeholder -->
@@ -224,15 +224,15 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-4xl mx-auto">
                     <!-- Left Column: Current KK Photo -->
-                    <div class="flex flex-col items-center gap-3 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <div class="flex flex-col items-center gap-3 p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md mx-auto">
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Foto KK Saat Ini</span>
-                        <div id="kk-current-photo-container">
+                        <div id="kk-current-photo-container" class="w-full flex justify-center">
                             @if($customer->kk_photo)
-                            <div class="w-80 h-60 rounded-xl overflow-hidden border border-slate-200 bg-white flex items-center justify-center p-2 shadow-inner">
+                            <div class="w-full max-w-[320px] h-60 rounded-xl overflow-hidden border border-slate-200 bg-white flex items-center justify-center p-2 shadow-inner">
                                 <img src="{{ asset('storage/' . $customer->kk_photo) }}" alt="Foto KK Saat Ini" class="max-w-full max-h-full object-contain rounded-lg">
                             </div>
                             @else
-                            <div class="w-80 h-60 rounded-xl border-2 border-dashed border-slate-200 bg-white flex flex-col items-center justify-center text-slate-400 gap-2">
+                            <div class="w-full max-w-[320px] h-60 rounded-xl border-2 border-dashed border-slate-200 bg-white flex flex-col items-center justify-center text-slate-400 gap-2">
                                 <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
@@ -243,7 +243,7 @@
                     </div>
 
                     <!-- Right Column: Camera KK Widget -->
-                    <div class="flex flex-col items-center gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <div class="flex flex-col items-center gap-4 p-4 sm:p-6 bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md mx-auto">
                         <div class="w-full flex items-center justify-between">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Ambil Foto Baru</span>
                             <span id="kk-camera-badge" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-200">
@@ -252,14 +252,14 @@
                         </div>
 
                         <!-- Tombol Aktifkan Kamera (Default Visible) -->
-                        <div id="kk-camera-activation-area" class="w-80 h-60 flex flex-col items-center justify-center bg-white border border-dashed border-slate-300 rounded-xl text-center space-y-3 p-4">
+                        <div id="kk-camera-activation-area" class="w-full max-w-[320px] h-60 flex flex-col items-center justify-center bg-white border border-dashed border-slate-300 rounded-xl text-center space-y-3 p-4">
                             <div class="p-2.5 bg-rose-50 text-rose-600 rounded-full">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
                             <p class="text-[10px] text-slate-500 font-semibold px-2">Gunakan kamera untuk mengambil foto KK secara langsung.</p>
-                            <div class="flex items-center gap-2 justify-center">
+                            <div class="flex flex-wrap items-center gap-2 justify-center w-full">
                                 <button type="button" id="kk-btn-start-camera" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] flex items-center gap-1 transition shadow-md shadow-blue-500/10 cursor-pointer">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -275,7 +275,7 @@
                         </div>
 
                         <!-- Camera Active Area (Hidden by Default) -->
-                        <div id="kk-camera-active-area" class="hidden w-80 space-y-3">
+                        <div id="kk-camera-active-area" class="hidden w-full max-w-[320px] space-y-3">
                             <!-- Video & Canvas Viewport Container -->
                             <div class="bg-slate-950 w-full h-60 rounded-xl relative overflow-hidden flex flex-col items-center justify-center border border-slate-800 shadow-inner group">
                                 <!-- Placeholder -->
