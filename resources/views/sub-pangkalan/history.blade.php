@@ -31,7 +31,7 @@
 
     <!-- Premium Filter Card -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6">
-        <form id="history-filter-form" method="GET" action="{{ route('sub-pangkalan.history') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+        <form id="history-filter-form" method="GET" action="{{ route('sub-pangkalan.history') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
             <!-- Pencarian (Pelanggan/Catatan) -->
             <div class="w-full">
                 <label for="search" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Pencarian</label>
@@ -42,33 +42,6 @@
                         🔍
                     </div>
                 </div>
-            </div>
-
-            <!-- Jenis Transaksi -->
-            <div class="w-full">
-                <label for="transaction_type" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Jenis Transaksi</label>
-                <select name="transaction_type" id="transaction_type" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition duration-200 font-semibold h-[42px]">
-                    <option value="">Semua Jenis</option>
-                    <option value="sell" {{ request('transaction_type') == 'sell' ? 'selected' : '' }}>🛒 Penjualan</option>
-                    <option value="receive" {{ request('transaction_type') == 'receive' ? 'selected' : '' }}>📥 Terima LPG</option>
-                </select>
-            </div>
-
-            <!-- Tipe Tabung -->
-            <div class="w-full">
-                <label for="tabung_type" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tipe Tabung</label>
-                <select name="tabung_type" id="tabung_type" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition duration-200 font-semibold h-[42px]">
-                    <option value="">Semua Tipe Tabung</option>
-                    @if(isset($tabungTypes) && count($tabungTypes) > 0)
-                        @foreach($tabungTypes as $tt)
-                            <option value="{{ $tt }}" {{ request('tabung_type') == $tt ? 'selected' : '' }}>{{ $tt }}</option>
-                        @endforeach
-                    @else
-                        <option value="3kg" {{ request('tabung_type') == '3kg' ? 'selected' : '' }}>3kg</option>
-                        <option value="12kg" {{ request('tabung_type') == '12kg' ? 'selected' : '' }}>12kg</option>
-                        <option value="5.5kg" {{ request('tabung_type') == '5.5kg' ? 'selected' : '' }}>5.5kg</option>
-                    @endif
-                </select>
             </div>
 
             <!-- Bulan -->
