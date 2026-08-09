@@ -8,7 +8,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">Riwayat Transaksi</h2>
-            <p class="text-slate-500 text-sm mt-1">Daftar lengkap seluruh arus distribusi masuk, penjualan pelanggan, dan penukaran tabung kosong.</p>
+            <p class="text-slate-500 text-sm mt-1">Daftar lengkap seluruh transaksi penjualan pelanggan.</p>
         </div>
         <div class="flex items-center gap-3 shrink-0">
             <span id="total-count-badge" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl text-xs font-bold border border-slate-200">

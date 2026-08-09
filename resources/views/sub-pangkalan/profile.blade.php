@@ -84,7 +84,7 @@
                     <span class="block text-slate-400 font-bold uppercase tracking-wider">Informasi Usaha</span>
                     <div class="mt-2 space-y-2 text-slate-800">
                         <div class="flex justify-between">
-                            <span class="text-slate-400">Kode Usaha:</span>
+                            <span class="text-slate-400">Nomor Induk Berusaha (NIB):</span>
                             <span>{{ $subPangkalan->code }}</span>
                         </div>
                         <div class="flex justify-between">

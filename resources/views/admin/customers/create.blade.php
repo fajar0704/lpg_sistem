@@ -109,8 +109,8 @@
                         </span>
                     </div>
 
-                    <!-- Tombol Aktifkan Kamera (Default Visible) -->
-                    <div id="camera-activation-area" class="flex flex-col items-center justify-center py-10 bg-slate-50 border border-dashed border-slate-300 rounded-2xl shadow-sm text-center space-y-3">
+                    <!-- Tombol Aktifkan Kamera (Hidden - Camera Auto Starts) -->
+                    <div id="camera-activation-area" class="hidden flex-col items-center justify-center py-10 bg-slate-50 border border-dashed border-slate-300 rounded-2xl shadow-sm text-center space-y-3">
                         <div class="p-3 bg-blue-50 text-blue-600 rounded-full">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
@@ -132,8 +132,8 @@
                         </div>
                     </div>
 
-                    <!-- Camera Active Area (Hidden by Default) -->
-                    <div id="camera-active-area" class="hidden space-y-3">
+                    <!-- Camera Active Area (Auto Visible) -->
+                    <div id="camera-active-area" class="space-y-3">
                         <!-- Viewport Box Kamera -->
                         <div class="bg-slate-950 aspect-video rounded-2xl relative overflow-hidden flex flex-col items-center justify-center border border-slate-800 shadow-inner group">
                             <!-- Placeholder View -->
@@ -214,8 +214,8 @@
                             </span>
                         </div>
 
-                        <!-- Tombol Aktifkan Kamera KK (Default Visible) -->
-                        <div id="kk-camera-activation-area" class="flex flex-col items-center justify-center py-10 bg-slate-50 border border-dashed border-slate-300 rounded-2xl shadow-sm text-center space-y-3">
+                        <!-- Tombol Aktifkan Kamera KK (Hidden - Auto Starts) -->
+                        <div id="kk-camera-activation-area" class="hidden flex-col items-center justify-center py-10 bg-slate-50 border border-dashed border-slate-300 rounded-2xl shadow-sm text-center space-y-3">
                             <div class="p-3 bg-blue-50 text-blue-600 rounded-full">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
@@ -237,8 +237,8 @@
                             </div>
                         </div>
 
-                        <!-- Camera Active Area (Hidden by Default) -->
-                        <div id="kk-camera-active-area" class="hidden space-y-3">
+                        <!-- Camera Active Area (Auto Visible) -->
+                        <div id="kk-camera-active-area" class="space-y-3">
                             <!-- Viewport Box Kamera -->
                             <div class="bg-slate-950 aspect-video rounded-2xl relative overflow-hidden flex flex-col items-center justify-center border border-slate-800 shadow-inner group">
                                 <!-- Placeholder View -->
@@ -721,6 +721,12 @@
                 streamKK = null;
             }
             videoKK.srcObject = null;
+        }
+
+        // Auto start cameras on load
+        startCamera();
+        if (categorySelect.value !== 'konsumen_umum') {
+            startCameraKK();
         }
     });
 </script>
