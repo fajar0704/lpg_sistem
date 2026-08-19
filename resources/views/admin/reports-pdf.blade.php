@@ -184,15 +184,15 @@
                     @endif
                     <td>{{ $c->created_at ? \Carbon\Carbon::parse($c->created_at)->translatedFormat('d F Y') : '-' }}</td>
                     <td class="text-center">
-                        @if(!empty($c->photo) && file_exists(public_path('storage/' . $c->photo)))
-                            <img src="{{ public_path('storage/' . $c->photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
+                        @if(!empty($c->photo) && file_exists(Storage::disk('public')->path($c->photo)))
+                            <img src="{{ Storage::disk('public')->path($c->photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
                         @else
                             <span style="font-size: 10px; color: #999; font-style: italic;">Tidak ada</span>
                         @endif
                     </td>
                     <td class="text-center">
-                        @if(!empty($c->kk_photo) && file_exists(public_path('storage/' . $c->kk_photo)))
-                            <img src="{{ public_path('storage/' . $c->kk_photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
+                        @if(!empty($c->kk_photo) && file_exists(Storage::disk('public')->path($c->kk_photo)))
+                            <img src="{{ Storage::disk('public')->path($c->kk_photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
                         @else
                             <span style="font-size: 10px; color: #999; font-style: italic;">Tidak ada</span>
                         @endif
