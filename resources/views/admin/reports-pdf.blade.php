@@ -184,15 +184,37 @@
                     @endif
                     <td>{{ $c->created_at ? \Carbon\Carbon::parse($c->created_at)->translatedFormat('d F Y') : '-' }}</td>
                     <td class="text-center">
-                        @if(!empty($c->photo) && file_exists(Storage::disk('public')->path($c->photo)))
-                            <img src="{{ Storage::disk('public')->path($c->photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
+                        @php
+                            $photoPath = !empty($c->photo) && \Illuminate\Support\Facades\Storage::disk('public')->exists($c->photo)
+                                ? \Illuminate\Support\Facades\Storage::disk('public')->path($c->photo)
+                                : null;
+                            $photoSrc = null;
+                            if ($photoPath && file_exists($photoPath)) {
+                                $ext = pathinfo($photoPath, PATHINFO_EXTENSION);
+                                $mime = ($ext === 'jpg' || $ext === 'jpeg') ? 'jpeg' : (($ext === 'png') ? 'png' : (($ext === 'webp') ? 'webp' : $ext));
+                                $photoSrc = 'data:image/' . $mime . ';base64,' . base64_encode(file_get_contents($photoPath));
+                            }
+                        @endphp
+                        @if($photoSrc)
+                            <img src="{{ $photoSrc }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
                         @else
                             <span style="font-size: 10px; color: #999; font-style: italic;">Tidak ada</span>
                         @endif
                     </td>
                     <td class="text-center">
-                        @if(!empty($c->kk_photo) && file_exists(Storage::disk('public')->path($c->kk_photo)))
-                            <img src="{{ Storage::disk('public')->path($c->kk_photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
+                        @php
+                            $kkPath = !empty($c->kk_photo) && \Illuminate\Support\Facades\Storage::disk('public')->exists($c->kk_photo)
+                                ? \Illuminate\Support\Facades\Storage::disk('public')->path($c->kk_photo)
+                                : null;
+                            $kkSrc = null;
+                            if ($kkPath && file_exists($kkPath)) {
+                                $ext = pathinfo($kkPath, PATHINFO_EXTENSION);
+                                $mime = ($ext === 'jpg' || $ext === 'jpeg') ? 'jpeg' : (($ext === 'png') ? 'png' : (($ext === 'webp') ? 'webp' : $ext));
+                                $kkSrc = 'data:image/' . $mime . ';base64,' . base64_encode(file_get_contents($kkPath));
+                            }
+                        @endphp
+                        @if($kkSrc)
+                            <img src="{{ $kkSrc }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
                         @else
                             <span style="font-size: 10px; color: #999; font-style: italic;">Tidak ada</span>
                         @endif
