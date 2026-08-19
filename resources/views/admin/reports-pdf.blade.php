@@ -164,8 +164,6 @@
                     <th>Kategori</th>
                     @endif
                     <th>Tanggal Terdaftar</th>
-                    <th class="text-center">Foto KTP</th>
-                    <th class="text-center">Foto KK</th>
                     <th>Nomor HP</th>
                 </tr>
             </thead>
@@ -183,25 +181,11 @@
                     <td>{{ $c->category }}</td>
                     @endif
                     <td>{{ $c->created_at ? \Carbon\Carbon::parse($c->created_at)->translatedFormat('d F Y') : '-' }}</td>
-                    <td class="text-center">
-                        @if(!empty($c->photo) && file_exists(public_path('storage/' . $c->photo)))
-                            <img src="{{ public_path('storage/' . $c->photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
-                        @else
-                            <span style="font-size: 10px; color: #999; font-style: italic;">Tidak ada</span>
-                        @endif
-                    </td>
-                    <td class="text-center">
-                        @if(!empty($c->kk_photo) && file_exists(public_path('storage/' . $c->kk_photo)))
-                            <img src="{{ public_path('storage/' . $c->kk_photo) }}" style="width: 110px; height: 70px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
-                        @else
-                            <span style="font-size: 10px; color: #999; font-style: italic;">Tidak ada</span>
-                        @endif
-                    </td>
                     <td>{{ $c->phone }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="{{ $reportType === 'pelanggan_sub_pangkalan' ? 5 : 6 }}" class="text-center">Tidak ada data pelanggan.</td>
+                    <td colspan="{{ $reportType === 'pelanggan_sub_pangkalan' ? 3 : 4 }}" class="text-center">Tidak ada data pelanggan.</td>
                 </tr>
                 @endforelse
             </tbody>
