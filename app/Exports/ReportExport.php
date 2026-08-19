@@ -51,10 +51,12 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping
             $headings = [
                 'Nama Pelanggan',
                 'NIK',
-                'Kategori',
-                'Tanggal Terdaftar',
-                'No Telepon',
             ];
+            if ($this->data['reportType'] !== 'pelanggan_sub_pangkalan') {
+                $headings[] = 'Kategori';
+            }
+            $headings[] = 'Tanggal Terdaftar';
+            $headings[] = 'No Telepon';
             if ($this->data['reportType'] === 'pelanggan_sub_pangkalan') {
                 $headings[] = 'Sub Pangkalan';
             }
@@ -85,10 +87,12 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping
             $rowMap = [
                 $row->name,
                 $row->ktp,
-                $row->category === 'rumah_tangga' ? 'Rumah Tangga' : ($row->category === 'usaha_mikro' ? 'Usaha Mikro' : ($row->category === 'konsumen_umum' ? 'Konsumen Umum' : ucfirst(str_replace('_', ' ', $row->category)))),
-                $row->created_at ? \Carbon\Carbon::parse($row->created_at)->translatedFormat('d F Y') : '-',
-                $row->phone ?? '-',
             ];
+            if ($this->data['reportType'] !== 'pelanggan_sub_pangkalan') {
+                $rowMap[] = $row->category === 'rumah_tangga' ? 'Rumah Tangga' : ($row->category === 'usaha_mikro' ? 'Usaha Mikro' : ($row->category === 'konsumen_umum' ? 'Konsumen Umum' : ucfirst(str_replace('_', ' ', $row->category))));
+            }
+            $rowMap[] = $row->created_at ? \Carbon\Carbon::parse($row->created_at)->translatedFormat('d F Y') : '-';
+            $rowMap[] = $row->phone ?? '-';
             if ($this->data['reportType'] === 'pelanggan_sub_pangkalan') {
                 $rowMap[] = $row->sub_pangkalan_name ?? '-';
             }

@@ -17,9 +17,9 @@ class AdminController extends Controller
     public function dashboard()
     {
         $totalSubPangkalan = SubPangkalan::count();
-        $countRumahTangga = \App\Models\Customer::where('category', 'rumah_tangga')->count();
-        $countUmkm = \App\Models\Customer::where('category', 'usaha_mikro')->count();
-        $countKonsumenUmum = \App\Models\Customer::where('category', 'konsumen_umum')->count();
+        $countRumahTangga = \App\Models\Customer::whereNull('sub_pangkalan_id')->where('category', 'rumah_tangga')->count();
+        $countUmkm = \App\Models\Customer::whereNull('sub_pangkalan_id')->where('category', 'usaha_mikro')->count();
+        $countKonsumenUmum = \App\Models\Customer::whereNull('sub_pangkalan_id')->where('category', 'konsumen_umum')->count();
         $totalCustomers = $countRumahTangga + $countUmkm + $countKonsumenUmum + $totalSubPangkalan;
         $stocks = StockLpg::all();
         $totalStokIsi = $stocks->sum('stok_isi');

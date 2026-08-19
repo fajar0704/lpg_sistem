@@ -160,7 +160,9 @@
             <thead>
                 <tr>
                     <th>Nama Pelanggan</th>
+                    @if($reportType !== 'pelanggan_sub_pangkalan')
                     <th>Kategori</th>
+                    @endif
                     <th>Tanggal Terdaftar</th>
                     <th class="text-center">Foto KTP</th>
                     <th class="text-center">Foto KK</th>
@@ -177,7 +179,9 @@
                             <br><span style="font-size: 9px; color: #1e40af; font-weight: bold;">Pengecer: {{ $c->sub_pangkalan_name }}</span>
                         @endif
                     </td>
+                    @if($reportType !== 'pelanggan_sub_pangkalan')
                     <td>{{ $c->category }}</td>
+                    @endif
                     <td>{{ $c->created_at ? \Carbon\Carbon::parse($c->created_at)->translatedFormat('d F Y') : '-' }}</td>
                     <td class="text-center">
                         @if(!empty($c->photo) && file_exists(public_path('storage/' . $c->photo)))
@@ -197,7 +201,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">Tidak ada data pelanggan.</td>
+                    <td colspan="{{ $reportType === 'pelanggan_sub_pangkalan' ? 5 : 6 }}" class="text-center">Tidak ada data pelanggan.</td>
                 </tr>
                 @endforelse
             </tbody>

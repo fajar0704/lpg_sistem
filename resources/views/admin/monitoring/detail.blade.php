@@ -282,7 +282,6 @@
             <div class="flex flex-col sm:flex-row items-center gap-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100">
                 <div class="text-center sm:text-left overflow-hidden w-full">
                     <h4 id="modal-name" class="font-bold text-slate-800 text-base md:text-lg truncate"></h4>
-                    <span id="modal-category" class="inline-block px-2.5 py-0.5 mt-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-md"></span>
                 </div>
             </div>
 
@@ -431,7 +430,6 @@
 
     function openCustomerModal(name, category, ktp, phone, address, photoUrl, kkPhotoUrl) {
         document.getElementById('modal-name').textContent = name;
-        document.getElementById('modal-category').textContent = category;
         document.getElementById('modal-ktp').textContent = ktp;
         document.getElementById('modal-phone').textContent = phone;
         document.getElementById('modal-address').textContent = address;

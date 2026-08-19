@@ -29,6 +29,19 @@ class CustomerController extends Controller
             $query->where('category', $request->category);
         }
 
+        // Filter by registration source (default to 'pangkalan' if not specified or invalid)
+        $source = $request->input('source', 'pangkalan');
+        if ($source === 'pangkalan') {
+            $query->whereNull('sub_pangkalan_id');
+        } elseif ($source === 'sub_pangkalan') {
+            $query->whereNotNull('sub_pangkalan_id');
+        }
+
+        // Filter by sub pangkalan ID
+        if ($request->filled('sub_pangkalan_id')) {
+            $query->where('sub_pangkalan_id', $request->sub_pangkalan_id);
+        }
+
         // Filter by status
         if ($request->filled('status')) {
             if ($request->status === 'active') {
@@ -47,18 +60,20 @@ class CustomerController extends Controller
             ]);
         }
 
-        // Calculate statistics for general customers
-        $totalCustomers = Customer::count();
-        $rumahTanggaCount = Customer::where('category', 'rumah_tangga')->count();
-        $usahaMikroCount = Customer::where('category', 'usaha_mikro')->count();
-        $konsumenUmumCount = Customer::where('category', 'konsumen_umum')->count();
+        // Calculate statistics for general customers (only pangkalan customers)
+        $totalCustomers = Customer::whereNull('sub_pangkalan_id')->count();
+        $rumahTanggaCount = Customer::whereNull('sub_pangkalan_id')->where('category', 'rumah_tangga')->count();
+        $usahaMikroCount = Customer::whereNull('sub_pangkalan_id')->where('category', 'usaha_mikro')->count();
+        $konsumenUmumCount = Customer::whereNull('sub_pangkalan_id')->where('category', 'konsumen_umum')->count();
+        $subPangkalansList = \App\Models\SubPangkalan::orderBy('name')->get();
 
         return view('admin.customers.index', compact(
             'customers',
             'totalCustomers',
             'rumahTanggaCount',
             'usahaMikroCount',
-            'konsumenUmumCount'
+            'konsumenUmumCount',
+            'subPangkalansList'
         ));
     }
 
